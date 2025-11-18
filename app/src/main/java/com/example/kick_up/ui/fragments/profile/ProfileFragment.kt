@@ -23,7 +23,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentProfileBinding.inflate(layoutInflater)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
         setTabLayoutWithViewPager()
         return binding.root
 
@@ -31,17 +31,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun setTabLayoutWithViewPager() {
         binding.viewPager2.adapter = ProfilePagerAdapter(this)
-        TabLayoutMediator(binding.tabLayout, binding.viewPager2){ tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()
 
-        for (i in 0..1){
+        for (i in 0..1) {
             val textView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_title, null)
-            as TextView
+                    as TextView
             binding.tabLayout.getTabAt(i)?.customView = textView
         }
 
-        val firstTabText = binding.tabLayout.getTabAt(0)?.customView?.findViewById<TextView>(android.R.id.text1)
+        val firstTabText =
+            binding.tabLayout.getTabAt(0)?.customView?.findViewById<TextView>(android.R.id.text1)
         firstTabText?.setTypeface(null, Typeface.BOLD)
 
         // Слушатель для жирного текста
