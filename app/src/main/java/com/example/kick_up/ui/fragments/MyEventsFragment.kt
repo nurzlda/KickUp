@@ -58,10 +58,20 @@ class MyEventsFragment : Fragment(R.layout.fragment_my_events) {
             Event("12","15", "NOV", "The Peal of Kyrgyzstan", "Прошедшие", "everest"),
             Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
             Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
+            Event("12",null, "NOV", "The Peal of Kyrgyzstannnnnnnnnnnnnnnnnnnnnnnnnnnnn", "Прошедшие", "everest"),
         )
         eventList.clear()
         eventList.addAll(dummyEvents)
-        eventAdapter.notifyDataSetChanged()
+        eventAdapter.submitList(dummyEvents)
     }
 
 
