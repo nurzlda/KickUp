@@ -1,4 +1,4 @@
-package com.example.kick_up.ui.fragments.registration
+package com.example.kick_up.ui.fragments.login
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,9 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.kick_up.R
-import com.example.kick_up.databinding.FragmentRegBinding
+import com.example.kick_up.databinding.FragmentLoginBinding
 import com.example.kick_up.ui.fragments.HomeFragment
-import com.example.kick_up.ui.fragments.login.LoginFragment
 import com.example.kick_up.utils.AuthState
 import com.example.kick_up.utils.BaseFragment
 import com.example.kick_up.utils.Prefs
@@ -19,46 +18,50 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RegFragment : BaseFragment<FragmentRegBinding>(){
-    private lateinit var viewmodel: AuthViewModel
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+    private lateinit var viewModel: LoginViewModel
     override fun initBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentRegBinding {
-        return FragmentRegBinding.inflate(inflater,container,false)
+    ): FragmentLoginBinding {
+        return FragmentLoginBinding.inflate(inflater, container, false)
     }
 
     override fun setupViews() {
-        viewmodel = ViewModelProvider(this)[AuthViewModel::class.java]
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        binding.btnReg.setOnClickListener {
-            val email = binding.edtRegEmail.text
-            val password = binding.edtRegPassword.text
-            val name = binding.edtRegName.text
-            viewmodel.register(email = email.toString(), password = password.toString(), name = name.toString())
+        binding.btnLog.setOnClickListener {
+            val email = binding.edtLogEmail.text
+            val password = binding.edtLogPassword.text
+            viewModel.login(email = email.toString(), password = password.toString())
         }
 
-        loginClick()
     }
 
     override fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewmodel.authState.collect { state ->
-                    when(state){
+                viewModel.authState.collect { state ->
+                    when (state) {
                         is AuthState.Idle -> {
                         }
-                        is AuthState.Loading -> {
-                            Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
-                        }
+
+                        is AuthState.Loading -> Toast.makeText(
+                            context,
+                            "Loading",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+
                         is AuthState.Success -> {
                             openMainScreen()
-                            Toast.makeText(context, "Успешное регистрация", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Успешный вход", Toast.LENGTH_SHORT).show()
                             context?.let { Prefs.setLoggedIn(it, true) }
                         }
+
                         is AuthState.Error -> {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-                            Log.e("ololo", state.message )
+                            Log.e("ololoLogin", state.message)
                         }
                     }
                 }
@@ -67,11 +70,5 @@ class RegFragment : BaseFragment<FragmentRegBinding>(){
     }
     private fun openMainScreen(){
         parentFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
-    }
-    private fun loginClick(){
-        binding.txtLogin.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment()).commit()
-
-        }
     }
 }
