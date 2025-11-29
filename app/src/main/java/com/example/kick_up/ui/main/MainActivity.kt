@@ -1,6 +1,7 @@
 package com.example.kick_up.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -9,6 +10,8 @@ import com.example.kick_up.databinding.ActivityMainBinding
 import com.example.kick_up.ui.fragments.events.EventsFragment
 import com.example.kick_up.ui.fragments.MyEventsFragment
 import com.example.kick_up.ui.fragments.profile.ProfileFragment
+import com.example.kick_up.ui.fragments.registration.RegFragment
+import com.example.kick_up.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         openFragment(EventsFragment(), "Соревнования")
-        binding.bottomNavView.menu[1].isEnabled = false
+        binding.bottomNavView.menu.get(1).isEnabled = false
 
         setupBottomNavigation()
     }
