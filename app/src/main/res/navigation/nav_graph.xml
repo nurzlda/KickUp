@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/regFragment">
+
+    <fragment
+        android:id="@+id/regFragment"
+        android:name="com.example.kick_up.ui.fragments.registration.RegFragment"
+        android:label="fragment_reg"
+        tools:layout="@layout/fragment_reg" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.kick_up.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.kick_up.ui.fragments.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" />
+    <fragment
+        android:id="@+id/myEventsFragment"
+        android:name="com.example.kick_up.ui.fragments.MyEventsFragment"
+        android:label="fragment_my_events"
+        tools:layout="@layout/fragment_my_events" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.kick_up.ui.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/myStudentsFragment"
+        android:name="com.example.kick_up.ui.fragments.MyStudentsFragment"
+        android:label="fragment_my_students"
+        tools:layout="@layout/fragment_my_students" />
+</navigation>
