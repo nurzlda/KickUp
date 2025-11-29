@@ -7,6 +7,7 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.kick_up.R
 import com.example.kick_up.databinding.ActivityMainBinding
+import com.example.kick_up.ui.fragments.HomeFragment
 import com.example.kick_up.ui.fragments.events.EventsFragment
 import com.example.kick_up.ui.fragments.MyEventsFragment
 import com.example.kick_up.ui.fragments.profile.ProfileFragment
@@ -30,6 +31,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.menu.get(1).isEnabled = false
 
         setupBottomNavigation()
+        val isLoggedIn = Prefs.isLoggedIn(this)
+        Log.d("AuthCheck", "User logged in? $isLoggedIn")
+        if (isLoggedIn) {
+            openAfterReg()
+        }else{
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, RegFragment())
+                .commit()
+        }
     }
 
     private fun setupBottomNavigation() {
@@ -56,6 +66,11 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         binding.toolBarTitle.text = title
+    }
+    private fun openAfterReg(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, HomeFragment())
+            .commit()
     }
 
 }
