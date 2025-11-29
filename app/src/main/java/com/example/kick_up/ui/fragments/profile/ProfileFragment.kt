@@ -10,26 +10,32 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.kick_up.R
 import com.example.kick_up.databinding.FragmentProfileBinding
+import com.example.kick_up.utils.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
-
-    private lateinit var binding: FragmentProfileBinding
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private var tabTitles = arrayListOf("Мои соревнования", "Мои ученики")
 
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProfileBinding.inflate(layoutInflater)
+        container: ViewGroup?
+    ): FragmentProfileBinding {
+        return FragmentProfileBinding.inflate(inflater,container,false)
+    }
+
+
+    override fun setupViews() {
         setTabLayoutWithViewPager()
-        return binding.root
 
     }
+
+    override fun setupObservers() {
+
+    }
+
 
     private fun setTabLayoutWithViewPager() {
         binding.viewPager2.adapter = ProfilePagerAdapter(this)
@@ -58,10 +64,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 val textView = tab.customView?.findViewById<TextView>(android.R.id.text1)
                 textView?.setTypeface(null, Typeface.NORMAL)
             }
-
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
-
-
 }

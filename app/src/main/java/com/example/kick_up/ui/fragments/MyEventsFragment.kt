@@ -10,35 +10,37 @@ import com.example.kick_up.Event
 import com.example.kick_up.EventAdapter
 import com.example.kick_up.R
 import com.example.kick_up.databinding.FragmentMyEventsBinding
+import com.example.kick_up.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyEventsFragment : Fragment(R.layout.fragment_my_events) {
+class MyEventsFragment : BaseFragment<FragmentMyEventsBinding>() {
 
-    private lateinit var binding: FragmentMyEventsBinding
     private lateinit var eventList: ArrayList<Event>
     private lateinit var eventAdapter: EventAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding= FragmentMyEventsBinding.inflate(layoutInflater)
-        return binding.root
-
-
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMyEventsBinding {
+       return FragmentMyEventsBinding.inflate(inflater,container,false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
 
 
+
+    override fun setupViews() {
         eventList = arrayListOf()
         setupRecycler()
         loadDummyEvents()
 
     }
+
+    override fun setupObservers() {
+
+    }
+
 
     private fun setupRecycler() {
         eventAdapter = EventAdapter(eventList)
